@@ -25,7 +25,8 @@ MongoClient.connect(url, function(err, db) {
 app.get('/groupbytime', function (req, res) {
 
   aggregate(dbo, function(docs) {
-    res.send(JSON.stringify(docs));
+    res.writeHead(200, {"Content-Type": "application/json"});
+    res.end(JSON.stringify(docs));
   });
 })
 

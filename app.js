@@ -1,3 +1,6 @@
+/**
+ * retrieve bitcoin data and write to mongo.
+ */
 var http = require('http');
 
 var request = require('request');

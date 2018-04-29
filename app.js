@@ -9,7 +9,7 @@ var MongoClient = require('mongodb').MongoClient
 var blockUrlTemplate = 'https://blockchain.info/block-height/{block-height}?format=json';
 
 var endBlockHeight = 520363;
-let numBlock = 1; // number of blocks to retrieve
+let numBlock = 4; // number of blocks to retrieve
 var startBlockHeight = endBlockHeight - numBlock;
 let currBlockHeight = startBlockHeight;
 
@@ -108,7 +108,7 @@ var insertLastTxTime = function(db, obj, callback) {
   var collection = db.collection('last_tx_time');
   console.log("adding last_tx_time: ", obj);
   // Insert some documents
-  collection.replaceOne({"_id": obj._id}, obj, {upsert: true}, function(err, result) {
+  collection.update({"_id": obj._id}, obj, {upsert: true}, function(err, result) {
     assert.equal(err, null);
     console.log("Inserted last_tx_time into the collection: ", obj);
     callback(result);

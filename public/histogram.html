@@ -3,6 +3,10 @@
 
 <head>
 	<title>Bar Chart</title>
+  <script
+    src="https://code.jquery.com/jquery-3.3.1.js"
+    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous"></script>
 	<script src="Chart.bundle.js"></script>
 	<script src="utils.js"></script>
 	<style>
@@ -29,21 +33,34 @@
 				backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
 				borderColor: window.chartColors.blue,
 				borderWidth: 1,
+				// data: [
+				// 	266,
+        //   227,
+        //   248,
+        //   499,
+        //   236,
+        //   917,
+        //   431,
+        //   1623,
+        //   451,
+        //   696,
+        //   1476,
+        //   86,
+				//
+				//
+				// ]
 				data: [
-					266,
-          227,
-          248,
-          499,
-          236,
-          917,
-          431,
-          1623,
-          451,
-          696,
-          1476,
-          86,
-
-
+					11,
+					12,
+					11,
+					15,
+					17,
+					19,
+					21,
+					11,
+					12,
+					15,
+					17
 				]
 			}, ]
 
@@ -67,6 +84,18 @@
 				}
 			});
 
+
+			let url = "/groupbytime";
+			$.getJSON(url, function(data) {
+				let chartData = [];
+				for (let i = 0; i < data.length; i++) {
+					chartData.push(data[i].count);
+				}
+
+				// put the chartData into the chart.
+				barChartData.datasets[0].data = chartData;
+				window.myBar.update();
+			});
 		};
 
 		// document.getElementById('randomizeData').addEventListener('click', function() {
